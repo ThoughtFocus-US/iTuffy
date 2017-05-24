@@ -1,0 +1,14 @@
+---
+declared-services:
+  Titan-ChatBot:
+    label: conversation
+    plan: free
+applications:
+- name: iTSP
+  host: iTSP
+  instances: 1
+  memory: 256M
+  services:
+  - Titan-ChatBot
+  env:
+    NPM_CONFIG_PRODUCTION: false
