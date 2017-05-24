@@ -1,31 +1,20 @@
 //var Conversation = require('watson-developer-cloud/conversation/v1'); // watson sdk
 var watson = require('watson-developer-cloud'); 
-var qs = require('querystring');
 
 var PROTOCOL = 'https://';
-var ELASTIC_HOST = 'sl-us-dal-9-portal7.dblayer.com:22882/';
+var ELASTIC_HOST = 'sl-us-south-1-portal1.dblayer.com:16082/';
 //var ELASTIC_HOST = '182.18.168.17:9200/';
 var ELASTIC_USERNAME = 'admin';
-var ELASTIC_PASSWORD = 'MEGUUDRASIYQEAIM';
+var ELASTIC_PASSWORD = 'LOTQBGSSRDXAGSVV';
 var WATSON_CONVERSATION_SERVICE = 'https://gateway.watsonplatform.net/conversation/api';
 var port = process.env.PORT || process.env.VCAP_APP_PORT || 3000;
-//var CONVERSATION_USERNAME = process.env.CONVERSATION_USERNAME || '2edcb9e7-52c2-42ab-ba99-933c7aa84e47';
-//var CONVERSATION_PASSWORD = process.env.CONVERSATION_PASSWORD || 'Hm0KCxHIoVdE';
-//var WORKSPACE_ID = process.env.WORKSPACE_ID || '74bcdeb5-bf72-4622-8169-87168bcbe7f8';
-//Production
-//var WORKSPACE_ID = '36db3e9f-0036-4dbe-88d7-f03ec70d40f2';
-//var CONVERSATION_USERNAME = 'ba813476-9349-49e6-8743-812f0afc92f7';
-//var CONVERSATION_PASSWORD = '2u3PqlGkwXVZ';
-//Local - iTuffy
-var WORKSPACE_ID = 'eb59e38a-be44-4375-b60d-5dd2d056e91e';
-var CONVERSATION_USERNAME = 'b1aba40f-8616-4ea4-a598-92eeca22b578';
-var CONVERSATION_PASSWORD = 'yMnMrmL3bA52';
+var WORKSPACE_ID = process.env.WORKSPACE_ID || '719c3c4b-8deb-45db-8cb9-ce7581176e34';
+var CONVERSATION_USERNAME = process.env.CONVERSATION_USERNAME || '80be80a3-9d03-445c-b9fe-39d610ac20dd';
+var CONVERSATION_PASSWORD = process.env.CONVERSATION_PASSWORD || 'AN3IsvGdYyez';
 var ELASTIC_INDEX = 'events/';
 
 // Create the service wrapper
 var conversation = watson.conversation({
-  //username: '2edcb9e7-52c2-42ab-ba99-933c7aa84e47',
-  //password: 'Hm0KCxHIoVdE',
   username: CONVERSATION_USERNAME,
   password: CONVERSATION_PASSWORD,
   version: 'v1',
@@ -43,37 +32,12 @@ require('http').createServer(function(req, res) {
 	req.on('end',function() {
 		res.writeHead(200, {"Content-Type": "application/json; charset=UTF-8"});
 		console.log("RAW Input=="+d);
-		/*try {
-			//rawData = JSON.parse(d);//.replace(/\'/g, "").replace(/\\\'/g, ''));
-			//rawData = Object(d);
-			
-			rawData = qs.parse(d);
-			console.log("rawData=="+rawData);
-			_inputToWatson = rawData.text;
-			console.log("Success="+_inputToWatson);
-			context = rawData.context;
-		} catch(e) {
-			_inputToWatson = (/\"text\"\s*\:\"([^\"]+)\"/.test(d)) ? RegExp.$1 : 'Blank';
-			var textStartIndex = d.indexOf(',"text":"');
-			console.log("Failure="+_inputToWatson);
-			var i, j, label;
-			i = d.indexOf(label = '"context":'); 
-			j = d.indexOf(',"text":');  
-			context = (i == -1 || j == -1 || i > j) ? {} : JSON.parse(d.substring(i + label.length, j));
-			console.log("Failure Context="+context);
-		}
-		if(/\?([\s\S]+)$/.test(url = '' + req.url)) d += '&' + RegExp.$1;*/
-		/*for(s = {}, d = decodeURIComponent('' + d), i = 0, leni = (a = d.split('&')).length; i < leni; i++) {
-			// Query Params
-			if(!(k = a[i].trim())) continue;
-			s[(k = k.split('='))[0]] = k[1];
-		}*/
+
 		try {
 			rawData = JSON.parse(d);
 			_inputToWatson = rawData.text;
 			console.log("Success="+_inputToWatson);
 			context = rawData.context;
-			
 		} catch(e) {
 			_inputToWatson = (/\"text\"\s*\:\"([^\"]+)\"/.test(d)) ? RegExp.$1 : 'Blank';
 			console.log("Failure="+_inputToWatson);
@@ -84,11 +48,6 @@ require('http').createServer(function(req, res) {
 			console.log("Failure Context="+context);
 		}
 		if(/\?([\s\S]+)$/.test(url = '' + req.url)) d += '&' + RegExp.$1;
-		/*for(s = {}, d = decodeURIComponent('' + d), i = 0, leni = (a = d.split('&')).length; i < leni; i++) {
-			// Query Params
-			if(!(k = a[i].trim())) continue;
-			s[(k = k.split('='))[0]] = k[1];
-		}*/
 		switch(true) {
 			default: 
 				console.log('Default called - do nothing');
