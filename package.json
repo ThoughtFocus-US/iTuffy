@@ -1,5 +1,5 @@
 {
-  "name": "iTSP-TFIT-Dev",
+  "name": "iTSP-Graph-Demo1",
   "main": "server.js",
   "description": "An introduction to developing Node.js apps on the Bluemix platform",
   "version": "0.1.1",
@@ -14,9 +14,13 @@
   "repository": {},
   "dependencies": {
     "http-post": "^0.1.1",
+    "https": "^1.0.0",
+    "ibm-graph-client": "^0.4.1",
     "http-proxy": "^1.8.1",
     "request": "^2.81.0",
-    "watson-developer-cloud": "^2.8.1"
+    "watson-developer-cloud": "^2.8.1",
+    "xmldom": "^0.1.19",
+    "xpath.js": "^1.0.6"
   },
   "author": "IBM Corp",
   "license": "Apache-2.0"

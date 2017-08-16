@@ -1,0 +1,35 @@
+<events>
+	<attributes>
+		<RES_EVENT_START_DATETIME watson="FROM_DATETIME" elastic="fromDate"/>
+		<RES_EVENT_END_DATETIME watson="TO_DATETIME" elastic="toDate"/>
+		<RES_EVENTNAME watson="EVENT_NAME" elastic="name"/>
+		<RES_EVENT_LOCATION watson="EVENT_VENUE" elastic="venue"/>
+	</attributes>
+	<query>
+		<filter>
+			<range>
+				<fromDate>
+					<from attribute="RES_EVENT_START_DATETIME"/>
+				</fromDate>
+				<toDate>
+					<to attribute="RES_EVENT_END_DATETIME"/>
+				</toDate>
+			</range>
+		</filter>
+	</query>
+	<query>
+		<filter>
+			<venue attribute="RES_EVENT_LOCATION"/>
+			<name attribute="RES_EVENTNAME"/>
+			<fromDate attribute="RES_EVENT_START_DATETIME"/>
+			<toDate attribute="RES_EVENT_END_DATETIME"/>
+		</filter>
+	</query>
+	<query>
+		<query>
+			<query_string>
+				<query attribute="SEARCH_TEXT"/>
+			</query_string>
+		</query>
+	</query>
+</events>

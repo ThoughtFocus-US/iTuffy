@@ -1,0 +1,16 @@
+<map>
+	<watson service="https://gateway.watsonplatform.net/conversation/api" port="VCAP_APP_PORT"
+		version="v1" version_date="2017-02-03"
+		workspace_id="719c3c4b-8deb-45db-8cb9-ce7581176e34"
+		username="80be80a3-9d03-445c-b9fe-39d610ac20dd" password="AN3IsvGdYyez">
+		<events response="GET_EVENT_DETAILS"/>
+	</watson>
+	<elastic name="elastic1" host="sl-us-south-1-portal1.dblayer.com:16082/"
+		host1="sl-us-south-1-portal1.dblayer.com:16082/" username="admin" password="LOTQBGSSRDXAGSVV">
+		<events uri="events/_search"/>
+		<billing uri="billing/_search"/>
+	</elastic>
+	<elastic name="elastic2" host="182.18.168.17:9200/" username="" password="">
+		<events uri="events/_search"/>
+	</elastic>
+</map>
